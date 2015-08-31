@@ -1,5 +1,5 @@
 " init vundle
-set rtp+=~/.vim/bundle/Vundle.vim/
+set rtp+=~/.vim/bundle/vundle.vim/
 call vundle#rc()
 
 " vundle packages
