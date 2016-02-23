@@ -1,36 +1,36 @@
 " init vundle
-set rtp+=~/.vim/bundle/vundle.vim/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " vundle packages
-Bundle 'gmarik/vundle'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'ervandew/supertab'
-Bundle 'ervandew/eclim'
-Bundle 'bronson/vim-trailing-whitespace'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'xoria256.vim'
-Bundle 'ctrlp.vim'
-Bundle 'ZoomWin'
-Bundle 'Syntastic'
-Bundle 'matchit.zip'
-Bundle 'tComment'
-Bundle 'tristen/vim-sparkup'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'godlygeek/tabular'
-Bundle 'toyamarinyon/vim-swift'
-Bundle 'mustache/vim-mustache-handlebars'
-Bundle 'slim-template/vim-slim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'fatih/vim-go'
-Bundle 'mileszs/ack.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-salve'
-Bundle 'tpope/vim-leiningen'
+Plugin 'gmarik/vundle'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'ervandew/supertab'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'xoria256.vim'
+Plugin 'ctrlp.vim'
+Plugin 'ZoomWin'
+Plugin 'Syntastic'
+Plugin 'matchit.zip'
+Plugin 'tComment'
+Plugin 'tristen/vim-sparkup'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'godlygeek/tabular'
+Plugin 'toyamarinyon/vim-swift'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'slim-template/vim-slim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'fatih/vim-go'
+Plugin 'mileszs/ack.vim'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-salve'
+Plugin 'tpope/vim-leiningen'
+
+call vundle#end()
 
 " vim options
 filetype plugin indent on
