@@ -4,11 +4,15 @@ call vundle#begin()
 
 " vundle packages
 Plugin 'gmarik/vundle'
+Plugin 'scrooloose/nerdtree'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'vim-erlang/vim-erlang-runtime'
 Plugin 'ervandew/supertab'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'pangloss/vim-javascript'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'xoria256.vim'
 Plugin 'ctrlp.vim'
 Plugin 'ZoomWin'
@@ -16,19 +20,12 @@ Plugin 'Syntastic'
 Plugin 'matchit.zip'
 Plugin 'tComment'
 Plugin 'tristen/vim-sparkup'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'godlygeek/tabular'
-Plugin 'toyamarinyon/vim-swift'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'mileszs/ack.vim'
 Plugin 'honza/vim-snippets'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-salve'
-Plugin 'tpope/vim-leiningen'
 
 call vundle#end()
 
@@ -37,7 +34,8 @@ filetype plugin indent on
 syntax on
 cabbr te tabedit
 colorscheme xoria256
-" colorscheme solarized
+let g:airline_powerline_fonts = 1
+
 " set background=dark
 set expandtab
 set nocompatible
@@ -70,26 +68,9 @@ noremap  <Down> <Nop>
 noremap  <Left> <Nop>
 noremap  <Right> <Nop>
 
-" Java stuff
-map <leader>ma :JavaImportOrganize <CR>
-map <leader>fw :%s/\s\+$//<CR>:let @/=''<CR>
-map <leader>mp :JavaGetSet <CR>
-map <leader>mg :JavaGet <CR>
-map <leader>ms :JavaSet <CR>
-map <leader>mc :JavaCorrect <CR>
-map <leader>mr :JavaRename
-map <leader>fi gg=G
-map <leader>mi :JavaImpl <CR>
-map <leader>md :JavaDelegate <CR>
-map <leader>mx :JavaConstructor <CR>
-map <leader>mm :JavaSearch <CR>
-map <leader>cd :Eval<CR>
-map <leader>ca :%Eval<CR>
-map <leader>mk gg:r!pwd<CR>/java<CR>wwd0:s/\//\./g<CR>ipackage <ESC>A;<ESC>kddp
-map <leader>ck gg:r!pwd<CR>/\/src\/<CR>5ld0:s/\//\./g<CR>:s/_/-/g<CR>0i(ns <ESC>A)<ESC>kddpk$i.
-map <leader>ccO O;; ~~~~~~<ESC>2hi
-map <leader>cco o;; ~~~~~~<ESC>2hi
+" Ctrl-P config
+set wildignore+=*/target/*
 
-" Markdown stuff
-map <leader>d- yypVr-
-map <leader>d= yypVr=
+" NERDTree config
+map <C-\> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
