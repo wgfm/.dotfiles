@@ -61,6 +61,7 @@ let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let mapleader = ","
+let g:go_fmt_command = "goimports"
 
 " enforce purity
 noremap  <Up> <Nop>
