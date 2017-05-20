@@ -3,19 +3,14 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " vundle packages
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-erlang/vim-erlang-runtime'
 Plugin 'ervandew/supertab'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'pangloss/vim-javascript'
-Plugin 'xoria256.vim'
 Plugin 'ctrlp.vim'
-Plugin 'ZoomWin'
 Plugin 'Syntastic'
 Plugin 'matchit.zip'
 Plugin 'tComment'
@@ -24,8 +19,15 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
-Plugin 'mileszs/ack.vim'
 Plugin 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Themes
+Plugin 'xoria256.vim'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'albertorestifo/github.vim'
 
 call vundle#end()
 
@@ -33,10 +35,11 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 cabbr te tabedit
-colorscheme xoria256
-let g:airline_powerline_fonts = 1
+set background=light
+colorscheme PaperColor
 
 " set background=dark
+set laststatus=2
 set expandtab
 set nocompatible
 set tabstop=2
@@ -51,7 +54,7 @@ set backspace=2
 set cursorline
 set t_Co=256
 set colorcolumn=+1 " red line and over is error
-set textwidth=80
+set textwidth=90
 set hlsearch
 
 " turn off vim-markdown folding
@@ -61,7 +64,11 @@ let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let mapleader = ","
-let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = "goimports"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'papercolor'
+let python_highlight_builtins = 1
 
 " enforce purity
 noremap  <Up> <Nop>
@@ -72,6 +79,20 @@ noremap  <Right> <Nop>
 " Ctrl-P config
 set wildignore+=*/target/*
 
+" Leader shortcuts
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 " NERDTree config
 map <C-\> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd BufEnter * if !argc() | NERDTreeMirror | endif
+
+" Easier buffer switching
+:nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" Clipboard utils
+:nnoremap <F6> :w !pbcopy<CR><CR>
+:nnoremap <C-F6> :'a,'bw !pbcopy<CR><CR>
+
+let g:ycm_goto_buffer_command = 'vertical-split'
