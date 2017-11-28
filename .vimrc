@@ -10,6 +10,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'ervandew/supertab'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'ctrlp.vim'
 Plugin 'Syntastic'
 Plugin 'matchit.zip'
@@ -18,6 +19,7 @@ Plugin 'tristen/vim-sparkup'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'fatih/vim-go'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
@@ -35,10 +37,13 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 cabbr te tabedit
-set background=light
+"set background=light
 colorscheme PaperColor
 
-" set background=dark
+set macligatures
+set guifont=Iosevka:h13
+set guioptions=
+set background=dark
 set laststatus=2
 set expandtab
 set nocompatible
@@ -51,7 +56,7 @@ set nohlsearch
 set number
 set wrap
 set backspace=2
-set cursorline
+"set cursorline
 set t_Co=256
 set colorcolumn=+1 " red line and over is error
 set textwidth=90
@@ -71,10 +76,13 @@ let g:airline_theme = 'papercolor'
 let python_highlight_builtins = 1
 
 " enforce purity
-noremap  <Up> <Nop>
-noremap  <Down> <Nop>
-noremap  <Left> <Nop>
-noremap  <Right> <Nop>
+"noremap  <Up> <Nop>
+"noremap  <Down> <Nop>
+"noremap  <Left> <Nop>
+"noremap  <Right> <Nop>
+
+" turn off ex mode
+nnoremap Q <nop>
 
 " Ctrl-P config
 set wildignore+=*/target/*
