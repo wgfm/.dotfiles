@@ -39,3 +39,4 @@ function git-branch-prompt {
 }
 
 PS1="\u@\h \[\033[0;36m\]\W\[\033[0m\]\[\033[0;32m\]\$(git-branch-prompt)\[\033[0m\] \$ "
+
