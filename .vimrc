@@ -23,7 +23,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'fatih/vim-go'
 Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'elixir-editors/vim-elixir'
@@ -42,7 +42,7 @@ cabbr te tabedit
 "set background=light
 colorscheme PaperColor
 
-set macligatures
+"set macligatures
 set guifont=Iosevka:h13
 set guioptions=
 set background=dark
@@ -106,3 +106,6 @@ autocmd BufEnter * if !argc() | NERDTreeMirror | endif
 :nnoremap <C-F6> :'a,'bw !pbcopy<CR><CR>
 
 let g:ycm_goto_buffer_command = 'vertical-split'
+let g:go_fmt_command = "goimports"
+
+au FileType go setl ts=8 sw=8
