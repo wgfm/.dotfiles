@@ -1,19 +1,33 @@
+autoload -Uz compinit
+compinit
+
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/bin/google-cloud-sdk/bin:$HOME/apps/flutter/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/wgfm/.oh-my-zsh"
+# export ZSH="/Users/wernerhofstra/.oh-my-zsh"
+#
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+export BAZEL_VERSION=4.2.1
+
+export COLORTERM=1
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-export GOOGLE_APPLICATION_CREDENTIALS=~/.gcp.json
+export PUBSUB_EMULATOR_HOST=localhost:8681
 
-export GO111MODULE=on
+# Fox config
+export CGO_CFLAGS_ALLOW=-Xpreprocessor
+export PKG_CONFIG_PATH=/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig
+
+# export GO111MODULE=on
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="lambda"
+# ZSH_THEME="lambda"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -67,11 +81,10 @@ ZSH_THEME="lambda"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
+plugins=(git zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
+eval "$(starship init zsh)"
 
 # User configuration
 
@@ -101,3 +114,35 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/wernerhofstra/apps/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/wernerhofstra/apps/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/wernerhofstra/apps/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/wernerhofstra/apps/google-cloud-sdk/completion.zsh.inc'; fi
+
+function sternio {
+    stern $1 --exclude-container istio-proxy
+}
+
+function quote {
+  sed 's/\(.*\)/"\1"/g' $1
+}
+
+source <(kubectl completion zsh)
+# source /Users/wernerhofstra/.bazel/bin/bazel-complete.bash
+
+source ~/.zsh/aliases.zsh
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$PATH"
+
+if [ -f "~/.zsh_private" ]; then
+  source ~/.zsh_private
+fi
+
