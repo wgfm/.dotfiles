@@ -2,7 +2,7 @@ autoload -Uz compinit
 compinit
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/bin/google-cloud-sdk/bin:$HOME/apps/flutter/bin:$PATH
+export PATH=$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/bin/google-cloud-sdk/bin:$HOME/apps/flutter/bin:$HOME/Library/Python/3.9/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 # export ZSH="/Users/wernerhofstra/.oh-my-zsh"
@@ -142,7 +142,7 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 alias j!=jbang
 export PATH="$HOME/.jbang/bin:$PATH"
 
-if [ -f "~/.zsh_private" ]; then
+if [ -e ~/.zsh_private ]; then
   source ~/.zsh_private
 fi
 

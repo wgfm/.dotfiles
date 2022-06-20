@@ -12,6 +12,8 @@ alias gp='git push'
 alias grb='git rebase'
 alias gst='git status'
 
+alias root='cd $(git rev-parse --show-toplevel)'
+
 alias t='tmux'
 
 alias kctx='kubectx'
@@ -66,3 +68,7 @@ function ts() {
   tmux_switch $workspace
 }
 
+function mkcd() {
+  mkdir -p $1
+  cd $1
+}

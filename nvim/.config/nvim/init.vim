@@ -13,13 +13,24 @@ Plug 'junegunn/fzf.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-fugitive'
 Plug 'mileszs/ack.vim'
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+
+" Snippets
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+
+Plug 'rafamadriz/friendly-snippets'
+
 Plug 'rust-lang/rust.vim'
-"Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -32,6 +43,8 @@ call plug#end()
 let g:coc_global_extensions = [ 'coc-tsserver' ]
 
 colorscheme nord
+
+set completeopt=menu,menuone,noselect
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
@@ -72,6 +85,8 @@ let g:rustfmt_autosave = 1
 let g:ackprg = 'ag --vimgrep'
 
 lua require("lsp_config");
+
+lua require("luasnip.loaders.from_vscode").load()
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(1000)
