@@ -47,3 +47,5 @@ vim.api.nvim_set_keymap("i", "<leader><C-K>", "v:lua.tab_complete()", {expr = tr
 vim.api.nvim_set_keymap("s", "<leader><C-K>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
 vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+
+require("luasnip.loaders.from_vscode").load()

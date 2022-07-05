@@ -1,0 +1,11 @@
+require "wgfm/options"
+require "wgfm/plugins"
+require "wgfm/colorscheme"
+require "wgfm/gitsigns"
+require "wgfm/keybinds"
+require "wgfm/cmp"
+require "wgfm/autocommands"
+require "wgfm/lsp"
+require "wgfm/snippets"
+require "wgfm/lang_opts"
+
