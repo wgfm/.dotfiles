@@ -21,6 +21,8 @@ export PUBSUB_EMULATOR_HOST=localhost:8681
 export CGO_CFLAGS_ALLOW=-Xpreprocessor
 export PKG_CONFIG_PATH=/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig
 
+eval $(thefuck --alias)
+
 # export GO111MODULE=on
 
 # Set name of the theme to load --- if set to "random", it will
