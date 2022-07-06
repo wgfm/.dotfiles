@@ -43,7 +43,7 @@ return packer.startup(function(use)
 	-- My plugins here
 
 	use({ "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" }) -- Have packer manage itself
-  use({ 'junegunn/fzf', config = 'vim.cmd [[fzf#install()]]' })
+  use({ 'junegunn/fzf', run = './install --all' })
   use({ 'junegunn/fzf.vim' })
   use({ 'arcticicestudio/nord-vim' })
   use({ 'vim-airline/vim-airline' })
