@@ -4,9 +4,9 @@ function keymap(mode, bind, command, options)
 end
 
 -- Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.cmd [[
+  let mapleader = " "
+]]
 
 -- Modes
 --   normal_mode = "n",

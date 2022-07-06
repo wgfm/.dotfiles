@@ -31,7 +31,7 @@ nvim_lsp.gopls.setup {
       staticcheck = true,
     },
   },
-  on_attach = on_attach,
+  on_attach = handlers.on_attach,
 }
 
 function goimports(timeoutms)
