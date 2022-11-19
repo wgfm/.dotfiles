@@ -1,7 +1,7 @@
 alias vi='nvim'
 
 alias ga='git add'
-alias gb='git branch'
+alias gb='git branch | fzf | xargs git checkout'
 alias gbc='git rev-parse --abbrev-ref HEAD'
 alias gc='git commit'
 alias gco='git checkout'

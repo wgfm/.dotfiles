@@ -148,3 +148,5 @@ if [ -e ~/.zsh_private ]; then
   source ~/.zsh_private
 fi
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

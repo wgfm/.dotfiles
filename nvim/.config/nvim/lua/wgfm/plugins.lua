@@ -62,8 +62,13 @@ return packer.startup(function(use)
   -- Snippets
   use({ 'L3MON4D3/LuaSnip' })
   use({ 'saadparwaiz1/cmp_luasnip' })
-
   use({ 'rafamadriz/friendly-snippets' })
+
+  -- Navigation
+  use({
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  })
 
   use({ 'rust-lang/rust.vim' })
   use({ 'pangloss/vim-javascript' })
