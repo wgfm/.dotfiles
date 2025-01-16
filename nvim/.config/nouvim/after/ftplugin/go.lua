@@ -1,3 +1,9 @@
+local set = vim.opt_local
+
+set.shiftwidth = 4
+set.expandtab = false
+set.tabstop = 4
+
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("BufWritePre", {
@@ -24,6 +30,5 @@ autocmd("BufWritePre", {
 })
 
 vim.cmd [[
-  autocmd! FileType qf nnoremap <buffer> <leader>s <C-w><Enter><C-w>L
+   autocmd! FileType qf nnoremap <buffer> <leader>s <C-w><Enter><C-w>L
 ]]
-

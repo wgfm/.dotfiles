@@ -42,10 +42,10 @@ packer.init({
 return packer.startup(function(use)
 	-- My plugins here
 
-	use({ "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" }) -- Have packer manage itself
+  use({ "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" }) -- Have packer manage itself
   use({ 'junegunn/fzf', run = './install --all' })
   use({ 'junegunn/fzf.vim' })
-  use({ 'arcticicestudio/nord-vim' })
+  use({ 'NLKNguyen/papercolor-theme' })
   use({ 'vim-airline/vim-airline' })
   use({ 'vim-airline/vim-airline-themes' })
   use({ 'tpope/vim-fugitive' })
@@ -59,17 +59,31 @@ return packer.startup(function(use)
   use({ 'hrsh7th/cmp-path' })
   use({ 'hrsh7th/cmp-cmdline' })
 
+--  use({ 'github/copilot.vim' })
+
+  use({ 'nvim-treesitter/nvim-treesitter',
+        config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "elixir", "eex", "heex" },
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
+        end,
+    })
+
   -- Snippets
   use({ 'L3MON4D3/LuaSnip' })
-  use({ 'saadparwaiz1/cmp_luasnip' })
+--  use({ 'saadparwaiz1/cmp_luasnip' })
   use({ 'rafamadriz/friendly-snippets' })
 
   -- Navigation
   use({
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = { {'nvim-lua/plenary.nvim'} }
   })
 
+  use({ 'ziglang/zig.vim' })
+  use({ 'gleam-lang/gleam.vim' })
   use({ 'rust-lang/rust.vim' })
   use({ 'pangloss/vim-javascript' })
   use({ 'leafgarland/typescript-vim' })
