@@ -2,6 +2,7 @@ alias vi='nvim'
 
 alias ga='git add'
 alias gb='git branch | fzf | xargs git checkout'
+alias gbd='git branch | fzf -m | xargs git branch -D'
 alias gbc='git rev-parse --abbrev-ref HEAD'
 alias gc='git commit'
 alias gco='git checkout'
@@ -23,6 +24,9 @@ alias kc='kubectl'
 alias ls='ls --color=auto'
 
 alias gcp='gcloud auth login --update-adc'
+alias awsctx='export AWS_PROFILE=$(aws configure list-profiles | fzf --prompt "Choose active AWS profile:")'
+
+alias nova='miro-nova'
 
 # Push this branch to a remote, if it exists. Opens up a browser for a new
 # Merge Request. Tested with GitLab and MacOS only.

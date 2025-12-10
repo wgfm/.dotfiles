@@ -2,12 +2,13 @@ autoload -Uz compinit
 compinit
 
 # If you come from bash you might have to change your $PATH.
-export PATH=/opt/homebrew/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/bin/google-cloud-sdk/bin:$HOME/apps/flutter/bin:$HOME/Library/Python/3.9/bin:$PATH
+export PATH=/opt/homebrew/opt/llvm/bin:/opt/homebrew/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/bin/google-cloud-sdk/bin:$HOME/apps/flutter/bin:$HOME/Library/Python/3.9/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 # export ZSH="/Users/wernerhofstra/.oh-my-zsh"
-#
 export JAVA_HOME=$(/usr/libexec/java_home)
+
+export DOCKER_CLI_HINTS=false
 
 export NVIM_APPNAME=nouvim
 
@@ -18,6 +19,8 @@ export COLORTERM=1
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 export PUBSUB_EMULATOR_HOST=localhost:8681
+
+export BAT_THEME="ansi"
 
 # Fox config
 export CGO_CFLAGS_ALLOW=-Xpreprocessor
@@ -155,9 +158,12 @@ alias kx=kubectx
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+function testdb {
+	for i in $(docker ps | grep postgres-it-main | cut -d ' ' -f 1) ; do
+		echo $i
+		docker exec -it $i psql -U user database -c "set transaction isolation level read committed; select count(*) from $1"
+	done
+}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -165,3 +171,11 @@ export NVM_DIR="$HOME/.nvm"
 
  [[ ! -r /Users/wgfm/.opam/opam-init/init.zsh ]] || source /Users/wgfm/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+if [ -z ${SDKMAN_DIR+x} ]; then
+	export SDKMAN_DIR="$HOME/.sdkman"
+	[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
+

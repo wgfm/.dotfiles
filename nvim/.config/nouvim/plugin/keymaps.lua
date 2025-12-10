@@ -60,6 +60,10 @@ set("n", "grn", vim.lsp.buf.rename)
 set("n", "gra", vim.lsp.buf.code_action)
 set("n", "grr", vim.lsp.buf.references)
 
+-- Copy convenience
+set("n", "<leader>yl", ":.w !pbcopy<CR>")
+set("n", "<leader>ym", ":'a,'bw !pbcopy<CR>")
+
 -- Find files
 vim.cmd [[
   nnoremap <expr> <C-p> &buftype ==# 'quickfix' ? "\<C-P>" : ":Telescope find_files\<CR>"
