@@ -44,6 +44,7 @@ nvim_lsp.zls.setup {
     zls = {
       -- the following line can be removed if Zig is in your PATH
       -- zig_exe_path = '/path/to/zig_executable',
+      enable_build_on_save = true,
     }
   }
 }

@@ -22,11 +22,11 @@ export PUBSUB_EMULATOR_HOST=localhost:8681
 
 export BAT_THEME="ansi"
 
+export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
+
 # Fox config
 export CGO_CFLAGS_ALLOW=-Xpreprocessor
 export PKG_CONFIG_PATH=/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig
-
-eval $(thefuck --alias)
 
 # export GO111MODULE=on
 
@@ -158,11 +158,19 @@ alias kx=kubectx
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+function dbconn {
+	docker exec -it $1 psql -U user database
+}
+
 function testdb {
 	for i in $(docker ps | grep postgres-it-main | cut -d ' ' -f 1) ; do
 		echo $i
 		docker exec -it $i psql -U user database -c "set transaction isolation level read committed; select count(*) from $1"
 	done
+}
+
+function wta {
+	git worktree add -B "$1" "$1" "origin/$1"
 }
 
 export NVM_DIR="$HOME/.nvm"
@@ -172,10 +180,22 @@ export NVM_DIR="$HOME/.nvm"
  [[ ! -r /Users/wgfm/.opam/opam-init/init.zsh ]] || source /Users/wgfm/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# bun completions
+[ -s "/Users/wgfm/.bun/_bun" ] && source "/Users/wgfm/.bun/_bun"
+
+function hexpdf {
+	rm /tmp/doc.hex
+	pbpaste > /tmp/doc.hex
+	xxd -p -r /tmp/doc.hex > $1.pdf
+}
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+#
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 if [ -z ${SDKMAN_DIR+x} ]; then
 	export SDKMAN_DIR="$HOME/.sdkman"
 	[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
-
-
