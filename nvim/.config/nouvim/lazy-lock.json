@@ -10,7 +10,6 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "cd4ee08a988deb47ac3726f418fb27fe1a95729d" },
   "cmp-path": { "branch": "main", "commit": "c642487086dbd9a93160e1679a1327be111cbc25" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
-  "copilot-cmp": { "branch": "master", "commit": "15fc12af3d0109fa76b60b5cffa1373697e261d1" },
   "copilot.lua": { "branch": "master", "commit": "3547efbff9adeecbd9d431c0a2a8707b7f6a4131" },
   "eldritch.nvim": { "branch": "master", "commit": "c9131a5a11f00a2f428f563a4eb2c4aeb680d963" },
   "fakedonalds.nvim": { "branch": "master", "commit": "43942b6c29611a3f74431c60e11dc77bafe3bd02" },

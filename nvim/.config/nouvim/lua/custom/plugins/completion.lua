@@ -12,15 +12,15 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "roobert/tailwindcss-colorizer-cmp.nvim",
       "zbirenbaum/copilot.lua",
-      "zbirenbaum/copilot-cmp",
     },
     config = function()
+      -- copilot.lua only manages the Copilot language server (download, auth).
+      -- Suggestions are shown by Neovim's built-in inline completion instead
+      -- of copilot.lua's own UI, see lua/custom/completion.lua.
       require("copilot").setup {
         suggestion = { enabled = false },
         panel = { enabled = false },
       }
-
-      require("copilot_cmp").setup()
 
       require "custom.completion"
     end,

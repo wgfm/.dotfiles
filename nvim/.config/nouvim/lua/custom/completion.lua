@@ -3,14 +3,20 @@ require "custom.snippets"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append "c"
 
-local lspkind = require "lspkind"
-lspkind.init {
-  symbol_map = {
-    Copilot = "",
-  },
-}
+-- Copilot suggestions as ghost text, via the Copilot LSP client.
+vim.lsp.inline_completion.enable()
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.keymap.set("i", "<Tab>", function()
+  if not vim.lsp.inline_completion.get() then
+    return "<Tab>"
+  end
+end, { expr = true, desc = "Accept inline completion" })
+vim.keymap.set("i", "<M-]>", function() vim.lsp.inline_completion.select({ count = 1 }) end,
+  { desc = "Next inline completion" })
+vim.keymap.set("i", "<M-[>", function() vim.lsp.inline_completion.select({ count = -1 }) end,
+  { desc = "Previous inline completion" })
+
+local lspkind = require "lspkind"
 
 local kind_formatter = lspkind.cmp_format {
   mode = "symbol_text",
@@ -39,7 +45,6 @@ cmp.setup {
       -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
       group_index = 0,
     },
-    { name = "copilot" },
     { name = "nvim_lsp" },
     { name = "path" },
     { name = "buffer" },
@@ -80,8 +85,6 @@ cmp.setup {
   sorting = {
     priority_weight = 2,
     comparators = {
-      require("copilot_cmp.comparators").prioritize,
-
       -- Below is the default comparitor list and order for nvim-cmp
       cmp.config.compare.offset,
       -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
