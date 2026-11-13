@@ -1,90 +1,67 @@
 local M = {}
 
 M.setup = function()
-    local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
-    }
-
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
-
-    local config = {
-        -- disable virtual text
-        virtual_text = false,
-        -- show signs
-        signs = {
-            active = signs,
-        },
-        update_in_insert = true,
-        underline = true,
-        severity_sort = true,
-        float = {
-            focusable = false,
-            style = "minimal",
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = "",
-        },
-    }
-
-    vim.diagnostic.config(config)
-
+  vim.diagnostic.config({
+    virtual_text = false,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.INFO] = "",
+      },
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = false,
+      style = "minimal",
+      border = "rounded",
+      source = true,
+      header = "",
+      prefix = "",
+    },
+  })
 end
 
--- lsp keybinds
+local float_opts = { border = "rounded", max_width = 80 }
+
 local function lsp_keymaps(bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(name, value) vim.api.nvim_set_option_value(name, value, { buf = bufnr }) end
+  vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  local function map(lhs, rhs)
+    vim.keymap.set("n", lhs, rhs, { buffer = bufnr, silent = true })
+  end
 
-    -- Mappings.
-    local opts = { noremap=true, silent=true }
-
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded', max_width = 80 }) end, { buffer = bufnr, silent = true })
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help({ border = 'rounded', max_width = 80 }) end, { buffer = bufnr, silent = true })
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
+  map("gD", vim.lsp.buf.declaration)
+  map("gd", vim.lsp.buf.definition)
+  map("gr", vim.lsp.buf.references)
+  map("K", function() vim.lsp.buf.hover(float_opts) end)
+  map("gi", vim.lsp.buf.implementation)
+  map("[d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+  map("]d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
+  map("<C-k>", function() vim.lsp.buf.signature_help(float_opts) end)
+  map("<space>wa", vim.lsp.buf.add_workspace_folder)
+  map("<space>wr", vim.lsp.buf.remove_workspace_folder)
+  map("<space>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
+  map("<space>D", vim.lsp.buf.type_definition)
+  map("<space>rn", vim.lsp.buf.rename)
+  map("<space>ca", vim.lsp.buf.code_action)
+  map("<space>e", vim.diagnostic.open_float)
+  map("<space>q", vim.diagnostic.setloclist)
+  map("<space>f", vim.lsp.buf.format)
 end
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client == nil then
-            return
-        end
-
-        lsp_keymaps(args.buf)
-    end
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    lsp_keymaps(args.buf)
+  end,
 })
 
 local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not ok then
-    return
+if ok then
+  M.capabilities = cmp_nvim_lsp.default_capabilities()
 end
-
-M.capabilities = cmp_nvim_lsp.default_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 return M

@@ -6,8 +6,8 @@ vim.g.zig_fmt_autosave = 0
 --
 -- Formatting with ZLS matches `zig fmt`.
 vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = {"*.zig", "*.zon"},
-  callback = function(ev)
+  buffer = 0,
+  callback = function()
     vim.lsp.buf.format()
   end
 })
