@@ -3,6 +3,8 @@ local set = vim.opt_local
 set.shiftwidth = 4
 set.expandtab = false
 set.tabstop = 4
+-- l1: indent `case X: { ... }` bodies one level past the label, not two.
+set.cinoptions:append("l1")
 
 -- clangd hover only shows doc comments from headers; libc/POSIX headers have
 -- none, so look up the man page (section 3 first, then 2) instead.
